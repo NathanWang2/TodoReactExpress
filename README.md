@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Why The Project
+I want to learn the tech stack so I am following this guide on the MERN stack.
+https://codingthesmartway.com/the-mern-stack-tutorial-building-a-react-crud-application-from-start-to-finish-part-1/
+
 ## Available Scripts
 
 In the project directory, you can run:
