@@ -22,7 +22,16 @@ app.use('/todos', todoRoutes)
  * Or we could use this for a backend test route to make sure it's up...
  */
 todoRoutes.route('/').get((req, res) => {
-    res.send('Hello World!')
+    // MOCK DATA
+    const MockData = [{
+        todo_description: "This is the desc",
+        todo_responsible: "NOT ME",
+        todo_priority: 1
+    }]
+
+    res.send(MockData)
+    // res.send('Hello World!')
+
 })
 
 /**

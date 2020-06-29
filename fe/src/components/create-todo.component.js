@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreateTodo extends Component {
 
@@ -11,7 +12,7 @@ export default class CreateTodo extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            todo_desc: '',
+            todo_description: '',
             todo_responsible: '',
             todo_priority: '',
             todo_completed: false
@@ -20,7 +21,7 @@ export default class CreateTodo extends Component {
 
     onChangeDesc(desc) {
         this.setState({
-            todo_desc: desc.target.value
+            todo_description: desc.target.value
         });
     }
 
@@ -45,9 +46,19 @@ export default class CreateTodo extends Component {
         console.log(`Todo Responsible: ${this.state.todo_responsible}`);
         console.log(`Todo Priority: ${this.state.todo_priority}`);
 
+        const newTodo = {
+            todo_desc: this.state.todo_description,
+            todo_responsible: this.state.todo_responsible,
+            todo_priority: this.state.todo_priority,
+            todo_completed: this.state.todo_completed
+        };
+
+        axios.post('http://localhost:4000/add', newTodo)
+            .then(res => console.debug(res.data));
+
         // Reset the state
         this.setState({
-            todo_desc: '',
+            todo_description: '',
             todo_responsible: '',
             todo_priority: '',
             todo_completed: ''
@@ -66,7 +77,7 @@ export default class CreateTodo extends Component {
                             type="text"
                             className="form-control"
                             placeholder="Enter a description of the task"
-                            value={this.state.todo_desc}
+                            value={this.state.todo_description}
                             onChange={this.onChangeDesc}
                         />
                     </div>

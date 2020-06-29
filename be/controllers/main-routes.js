@@ -4,7 +4,7 @@ module.exports = function (app) {
         res.send('Hello World! This is a test')
     });
 
-    app.post('/add', (res, req) => {
+    app.post('/add', (req, res) => {
         res.send("This is where I would add info")
     });
 
