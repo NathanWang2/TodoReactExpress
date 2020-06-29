@@ -4,7 +4,8 @@ module.exports = function (app) {
         res.send('Hello World! This is a test')
     });
 
-    app.post('/add', (res, req) => {
+    app.post('/add', (req, res) => {
+        console.log(req.body);
         res.send("This is where I would add info")
     });
 
@@ -18,5 +19,26 @@ module.exports = function (app) {
         // TODO: Find task by id
         // TODO: If it exists then we can update, if not, then return a 404
     });
+
+    /**
+     * Gets all todo items. This method may need to be removed when I create my own features.
+     * Or we could use this for a backend test route to make sure it's up...
+     */
+    app.get('/', (req, res) => {
+        // MOCK DATA
+        const MockData = [{
+            todo_description: "This is the desc",
+            todo_responsible: "NOT ME",
+            todo_priority: "Medium"
+        },
+        {
+            todo_description: "This is the other desc",
+            todo_responsible: "Still not me",
+            todo_priority: "High"
+        }]
+
+        res.send(MockData)
+    })
+
     //other routes..
 }

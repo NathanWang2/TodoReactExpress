@@ -18,14 +18,6 @@ const todoRoutes = express.Router();
 app.use('/todos', todoRoutes)
 
 /**
- * Gets all todo items. This method may need to be removed when I create my own features.
- * Or we could use this for a backend test route to make sure it's up...
- */
-todoRoutes.route('/').get((req, res) => {
-    res.send('Hello World!')
-})
-
-/**
  * All the routes for creating a new item
  */
-require('./controllers/main-routes')(app);
+require('./controllers/main-routes')(todoRoutes);
