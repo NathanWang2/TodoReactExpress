@@ -1,6 +1,11 @@
-module.exports = function (app) {
+const TodoItems = require('../models/todo-item');
 
+module.exports = function (app) {
     app.get('/TEST', function (req, res) {
+        const RANDOM = new TodoItems();
+        RANDOM.todo_description = "Hello"
+        // console.debug(RANDOM)
+
         res.send('Hello World! This is a test')
     });
 
@@ -9,6 +14,8 @@ module.exports = function (app) {
         res.send("This is where I would add info")
     });
 
+    // TODO: Still need to figure out how I am going to handle completed tasks.
+    // Should I DELETE them or just hide/archive them.
 
     app.get('/:id', (req, res) => {
         res.send("This is where you should get info by id")
