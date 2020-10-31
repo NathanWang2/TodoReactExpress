@@ -10,11 +10,11 @@ function App() {
 	return (
 		<Router>
 			<div className="container">
-				<nav className="navbar navbar-expand-lg navbar-light bg-light">
+				{/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
 					<Link to="/" className="navbar-brand">
 						Todo App
 					</Link>
-					{/* <div className="collpase navbar-collapse">
+					<div className="collpase navbar-collapse">
 						<ul className="navbar-nav mr-auto">
 							<li className="navbar-item">
 								<Link to="/" className="nav-link">
@@ -27,8 +27,8 @@ function App() {
 								</Link>
 							</li>
 						</ul>
-					</div> */}
-				</nav>
+					</div> 
+				</nav>*/}
 				<h2>Todo App</h2>
 				<Switch>
 					<Route path="/" exact>
