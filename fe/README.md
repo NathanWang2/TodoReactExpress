@@ -1,6 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Why The Project
+
 I want to learn the tech stack so I am following this guide on the MERN stack.
 https://codingthesmartway.com/the-mern-stack-tutorial-building-a-react-crud-application-from-start-to-finish-part-1/
 
@@ -64,6 +65,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ma
 This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
 ### Deployment
+
+To deploy a PWA run the following commands
+
+-   `npm run build`
+-   `firebase deploy`
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
