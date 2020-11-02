@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { todoItem } from "../models/todo-item";
+import { todoItem } from "../../models/todo-item";
 import { set, get, del } from "idb-keyval";
-import CreateTodo from "./create-todo.component";
+import CreateTodo from "../create-todo.component";
 
 const Todo = (props) => (
 	<tr>
