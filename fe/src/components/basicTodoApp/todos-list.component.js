@@ -165,9 +165,12 @@ export default class TodosList extends Component {
 	render() {
 		return (
 			<div>
+				<h1>Welcome to the Basic Todo List Application!</h1>
 				<p>
-					You can use this as an offline todo list! A more feature
-					rich application will be coming soon!
+					You can use this as an todo list! No need for internet :)
+					<br />
+					A more feature rich application will be coming soon! If you
+					would like to swtich applications, click here!
 					<br />
 					Feel free to add items. <br />
 					Remove items by clicking on the item itself

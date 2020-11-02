@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { set, get } from "idb-keyval";
-import { Redirect, Link } from "react-router-dom";
-
-const DB_NAME = "isModernApp";
+import { Redirect } from "react-router-dom";
+import AppChoice from "./../../services/applicationChoice/app-choice";
 
 const checkPreselect = async () => {
-	const selection = await get(DB_NAME);
+	const selection = await AppChoice.getAppChoice();
 
 	console.debug("This is the selection: ", selection);
 	if (typeof selection !== "undefined") {
@@ -60,11 +58,11 @@ export default class AppSwitch extends Component {
 		this.setState({ redirect: true });
 		if (res) {
 			// New app
-			set(DB_NAME, "/create");
+			AppChoice.setApplication("/create");
 			this.setState({ location: "/create" });
 		} else {
 			// Basic app
-			set(DB_NAME, "/basic");
+			AppChoice.setApplication("/basic");
 			this.setState({ location: "/basic" });
 		}
 	};
