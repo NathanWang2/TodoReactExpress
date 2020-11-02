@@ -77,40 +77,38 @@ export default class AppSwitch extends Component {
 			<div>
 				<h1>Welcome to my first PWA!</h1>
 				<p>
-					Just to expalin, there are 2 main applications. A basic todo
+					Just to expalin, there are 2 applications. A basic todo
 					application and a Task Sharing Application. The Basic
 					application requires nothing to start, just click the button
 					and you are on your way! The Task sharing application will
 					require an email login to get the full functionality.
 				</p>
-				<h3>Which app would you like to use?</h3>
-				<h5>Don't worry, you can always change later</h5>
+				<h3>Which app would you like start out with?</h3>
+				<h5>
+					Don't worry, you can always switch between the applications
+					:)
+				</h5>
 				<form onSubmit={this.onSubmit}>
-					<ul>
-						<li>
-							<label>
-								<input
-									type="radio"
-									value="false"
-									checked={this.state.isModernApp === false}
-									onChange={this.onRadioChange}
-								/>
-								<span>Basic ToDo App</span>
-							</label>
-						</li>
-
-						<li>
-							<label>
-								<input
-									type="radio"
-									value="true"
-									checked={this.state.isModernApp === true}
-									onChange={this.onRadioChange}
-								/>
-								<span>Task Sharing App</span>
-							</label>
-						</li>
-					</ul>
+					<label>
+						<input
+							type="radio"
+							value="false"
+							checked={this.state.isModernApp === false}
+							onChange={this.onRadioChange}
+						/>
+						<span>Basic ToDo App</span>
+					</label>
+					<br />
+					<label>
+						<input
+							type="radio"
+							value="true"
+							checked={this.state.isModernApp === true}
+							onChange={this.onRadioChange}
+						/>
+						<span>Task Sharing App</span>
+					</label>
+					<br />
 					<button type="submit">Choose App</button>
 				</form>
 			</div>
