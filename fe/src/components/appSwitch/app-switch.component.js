@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import AppChoice from "./../../services/applicationChoice/app-choice";
+import { getAppChoice, setAppChoice } from "./../../services/applicationChoice/app-choice";
 
+// Could create a Static directory.
 const BASIC = "/basic";
-const FULL = "/create";
+const FULL = "/full";
 
 const checkPreselect = async () => {
-	const selection = await AppChoice.getAppChoice();
+	const selection = await getAppChoice();
 
-	console.debug("This is the selection: ", selection);
 	if (typeof selection !== "undefined") {
-		console.debug("Redirect to: ", selection);
 		return selection;
 	}
 	return null;
@@ -61,11 +60,11 @@ export default class AppSwitch extends Component {
 		this.setState({ redirect: true });
 		if (res) {
 			// New app
-			AppChoice.setApplication(FULL);
+			setAppChoice(FULL);
 			this.setState({ location: FULL });
 		} else {
 			// Basic app
-			AppChoice.setApplication(BASIC);
+			setAppChoice(BASIC);
 			this.setState({ location: BASIC });
 		}
 	};

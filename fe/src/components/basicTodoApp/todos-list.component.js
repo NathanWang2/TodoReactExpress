@@ -4,7 +4,7 @@ import axios from "axios";
 import { todoItem } from "../../models/todo-item";
 import { set, get, del } from "idb-keyval";
 import CreateTodo from "../create-todo.component";
-import appChoice from "../../services/applicationChoice/app-choice";
+import { swapApp } from "./../../services/applicationChoice/app-choice";
 
 const Todo = (props) => (
 	<tr>
@@ -166,20 +166,16 @@ export default class TodosList extends Component {
 
 	// Change the app choice and then redirect.
 	switchApps() {
-		appChoice.setApplication("/create");
+		swapApp().then(newLocation => {
+			console.debug("New Location: ", newLocation)
 
-		const redirect = {
-			location: "/create",
-			willRedirect: true,
-		};
+			const redirect = {
+				location: newLocation,
+				willRedirect: true,
+			};
 
-		console.debug("This is my object: ", redirect);
-		console.debug("This is the state: ", this.state.redirect);
-
-		// this.state.redirect.willRedirect = true;
-		// this.state.redirect.location = "/create";
-
-		this.setState({ redirect });
+			this.setState({ redirect });
+		});
 	}
 
 	// todoList() {
@@ -197,9 +193,9 @@ export default class TodosList extends Component {
 			<div>
 				<h1>Welcome to the Basic Todo List Application!</h1>
 				<p>
-					You can use this as an todo list! No need for internet :)
+					You can use this as a todo list! No need for internet :)
 					<br />A more feature rich application will be coming soon!
-					If you would like to swtich applications,
+					If you would like to switch applications.
 					<button onClick={this.switchApps}> click here!</button>
 					<br />
 					Feel free to add items. <br />

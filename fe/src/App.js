@@ -7,6 +7,7 @@ import EditTodo from "./components/edit-todo.component";
 import CreateTodo from "./components/create-todo.component";
 import NavBar from "./components/nav/nav-bar.component.js";
 import AppSwitch from "./components/appSwitch/app-switch.component.js";
+import ShareTaskApp from './components/shareTaskApp/share-task-app.component';
 
 function App() {
 	return (
@@ -17,8 +18,11 @@ function App() {
 					<Route path="/" exact>
 						<AppSwitch />
 					</Route>
-					<Route path="/basic" exact>
+					<Route path="/basic">
 						<TodoList />
+					</Route>
+					<Route path="/full">
+						<ShareTaskApp />
 					</Route>
 					<Route path="/edit/:id">
 						<EditTodo />
