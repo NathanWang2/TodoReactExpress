@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import AppChoice from "./../../services/applicationChoice/app-choice";
 
+const BASIC = "/basic";
+const FULL = "/create";
+
 const checkPreselect = async () => {
 	const selection = await AppChoice.getAppChoice();
 
@@ -58,12 +61,12 @@ export default class AppSwitch extends Component {
 		this.setState({ redirect: true });
 		if (res) {
 			// New app
-			AppChoice.setApplication("/create");
-			this.setState({ location: "/create" });
+			AppChoice.setApplication(FULL);
+			this.setState({ location: FULL });
 		} else {
 			// Basic app
-			AppChoice.setApplication("/basic");
-			this.setState({ location: "/basic" });
+			AppChoice.setApplication(BASIC);
+			this.setState({ location: BASIC });
 		}
 	};
 

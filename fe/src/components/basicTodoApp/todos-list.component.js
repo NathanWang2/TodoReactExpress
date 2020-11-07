@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { todoItem } from "../../models/todo-item";
 import { set, get, del } from "idb-keyval";
 import CreateTodo from "../create-todo.component";
+import appChoice from "../../services/applicationChoice/app-choice";
 
 const Todo = (props) => (
 	<tr>
@@ -29,8 +30,10 @@ const TodoForm = ({ addTodo }) => {
 
 			<button
 				onClick={() => {
-					addTodo(input.value);
-					input.value = "";
+					if (input.value.trim() !== "") {
+						addTodo(input.value);
+						input.value = "";
+					}
 				}}
 			>
 				+
@@ -79,13 +82,14 @@ const getAllTodoItems = async function () {
 		return value;
 	}
 
-	console.debug(value);
+	// console.debug(value);
 	return false;
 };
 
 export default class TodosList extends Component {
 	constructor(props) {
 		super(props);
+		this.switchApps = this.switchApps.bind(this);
 		this.state = {
 			todos: [
 				// {
@@ -95,6 +99,10 @@ export default class TodosList extends Component {
 				// 	todoCompleted: false,
 				// },
 			],
+			redirect: {
+				willRedirect: false,
+				location: "",
+			},
 		};
 	}
 
@@ -156,6 +164,24 @@ export default class TodosList extends Component {
 		this.setState({ todos: remainder });
 	}
 
+	// Change the app choice and then redirect.
+	switchApps() {
+		appChoice.setApplication("/create");
+
+		const redirect = {
+			location: "/create",
+			willRedirect: true,
+		};
+
+		console.debug("This is my object: ", redirect);
+		console.debug("This is the state: ", this.state.redirect);
+
+		// this.state.redirect.willRedirect = true;
+		// this.state.redirect.location = "/create";
+
+		this.setState({ redirect });
+	}
+
 	// todoList() {
 	// 	return this.state.todos.map(function (currentTodo, i) {
 	// 		return <Todo todo={currentTodo} key={i} />;
@@ -163,14 +189,18 @@ export default class TodosList extends Component {
 	// }
 
 	render() {
+		if (this.state.redirect.willRedirect) {
+			return <Redirect to={this.state.redirect.location} />;
+		}
+
 		return (
 			<div>
 				<h1>Welcome to the Basic Todo List Application!</h1>
 				<p>
 					You can use this as an todo list! No need for internet :)
-					<br />
-					A more feature rich application will be coming soon! If you
-					would like to swtich applications, click here!
+					<br />A more feature rich application will be coming soon!
+					If you would like to swtich applications,
+					<button onClick={this.switchApps}> click here!</button>
 					<br />
 					Feel free to add items. <br />
 					Remove items by clicking on the item itself

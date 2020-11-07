@@ -1,7 +1,13 @@
 import { set, get } from "idb-keyval";
 
 const DB_NAME = "isModernApp";
+const BASIC = "/basic";
+const FULL = "/create";
 
+/**
+ * This is for selection of which application type you would like to use.
+ * It reads and writes to the indexedDB.
+ */
 export default {
 	setApplication: async function (choice) {
 		try {
