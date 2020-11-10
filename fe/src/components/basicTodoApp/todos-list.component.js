@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
+
 import { todoItem } from "../../models/todo-item";
+
 import { set, get, del } from "idb-keyval";
+import axios from "axios";
+
 import CreateTodo from "../create-todo.component";
+import TodoForm from "./todo-form.component"
 import { swapApp } from "./../../services/applicationChoice/app-choice";
+
+import "./todos-list.css";
 
 const Todo = (props) => (
 	<tr>
@@ -16,31 +22,6 @@ const Todo = (props) => (
 		</td>
 	</tr>
 );
-
-const TodoForm = ({ addTodo }) => {
-	let input;
-
-	return (
-		<div>
-			<input
-				ref={(node) => {
-					input = node;
-				}}
-			/>
-
-			<button
-				onClick={() => {
-					if (input.value.trim() !== "") {
-						addTodo(input.value);
-						input.value = "";
-					}
-				}}
-			>
-				+
-			</button>
-		</div>
-	);
-};
 
 const RemoveComp = ({ todo, removeItem }) => {
 	return (
@@ -177,12 +158,6 @@ export default class TodosList extends Component {
 			this.setState({ redirect });
 		});
 	}
-
-	// todoList() {
-	// 	return this.state.todos.map(function (currentTodo, i) {
-	// 		return <Todo todo={currentTodo} key={i} />;
-	// 	});
-	// }
 
 	render() {
 		if (this.state.redirect.willRedirect) {

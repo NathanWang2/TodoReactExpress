@@ -1,0 +1,15 @@
+.todoForm {
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column;
+}
+
+.inputField {
+    width: 100%;
+}
+
+.submitTask {
+    align-self: flex-end;
+    padding: 10px 0 0 0;
+
+}
