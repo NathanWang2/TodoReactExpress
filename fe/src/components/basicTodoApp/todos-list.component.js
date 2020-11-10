@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
+
 import { todoItem } from "../../models/todo-item";
+
 import { set, get, del } from "idb-keyval";
+import axios from "axios";
+
 import CreateTodo from "../create-todo.component";
+import TodoForm from "./todo-form.component";
+
 import { swapApp } from "./../../services/applicationChoice/app-choice";
+
+import { Button, Grid, List, ListItem, ListItemText } from "@material-ui/core";
+
+import "./todos-list.css";
 
 const Todo = (props) => (
 	<tr>
@@ -17,53 +26,42 @@ const Todo = (props) => (
 	</tr>
 );
 
-const TodoForm = ({ addTodo }) => {
-	let input;
-
+const RemoveComp = ({ todo, removeItem, index }) => {
 	return (
-		<div>
-			<input
-				ref={(node) => {
-					input = node;
-				}}
-			/>
-
-			<button
-				onClick={() => {
-					if (input.value.trim() !== "") {
-						addTodo(input.value);
-						input.value = "";
-					}
-				}}
-			>
-				+
-			</button>
-		</div>
-	);
-};
-
-const RemoveComp = ({ todo, removeItem }) => {
-	return (
-		<div>
-			<li
-				onClick={() => {
-					removeItem(todo.todoId);
-				}}
-			>
-				{todo.todoDescription}
-			</li>
-		</div>
+		<Grid item xs={12}>
+			<div>
+				<List
+					style={{
+						backgroundColor:
+							index % 2 === 0 ? "#55D6BE" : "#FFFFFF",
+					}}
+					onClick={() => {
+						removeItem(todo.todoId);
+					}}
+				>
+					<ListItem>
+						<ListItemText primary={todo.todoDescription} />
+					</ListItem>
+				</List>
+			</div>
+		</Grid>
 	);
 };
 
 const ListItems = ({ todos, removeItem }) => {
+	let index = 0;
 	// Map through the todos
 	const todoNode = todos.map((todo) => {
 		return (
-			<RemoveComp todo={todo} key={todo.todoId} removeItem={removeItem} />
+			<RemoveComp
+				todo={todo}
+				key={todo.todoId}
+				removeItem={removeItem}
+				index={index++}
+			/>
 		);
 	});
-	return <ul>{todoNode}</ul>;
+	return <ul className="todoItems">{todoNode}</ul>;
 };
 
 /**
@@ -166,8 +164,8 @@ export default class TodosList extends Component {
 
 	// Change the app choice and then redirect.
 	switchApps() {
-		swapApp().then(newLocation => {
-			console.debug("New Location: ", newLocation)
+		swapApp().then((newLocation) => {
+			console.debug("New Location: ", newLocation);
 
 			const redirect = {
 				location: newLocation,
@@ -177,12 +175,6 @@ export default class TodosList extends Component {
 			this.setState({ redirect });
 		});
 	}
-
-	// todoList() {
-	// 	return this.state.todos.map(function (currentTodo, i) {
-	// 		return <Todo todo={currentTodo} key={i} />;
-	// 	});
-	// }
 
 	render() {
 		if (this.state.redirect.willRedirect) {
@@ -195,8 +187,15 @@ export default class TodosList extends Component {
 				<p>
 					You can use this as a todo list! No need for internet :)
 					<br />A more feature rich application will be coming soon!
-					If you would like to switch applications.
-					<button onClick={this.switchApps}> click here!</button>
+					If you would like to switch applications click the button
+					below.
+					<Button
+						color="secondary"
+						variant="contained"
+						onClick={this.switchApps}
+					>
+						Swap Applications
+					</Button>
 					<br />
 					Feel free to add items. <br />
 					Remove items by clicking on the item itself
