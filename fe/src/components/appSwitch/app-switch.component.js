@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { getAppChoice, setAppChoice } from "./../../services/applicationChoice/app-choice";
+import {
+	getAppChoice,
+	setAppChoice,
+} from "./../../services/applicationChoice/app-choice";
+
+import { Button, Radio, FormControlLabel, RadioGroup } from "@material-ui/core";
 
 // Could create a Static directory.
 const BASIC = "/basic";
@@ -89,27 +94,24 @@ export default class AppSwitch extends Component {
 					:)
 				</h5>
 				<form onSubmit={this.onSubmit}>
-					<label>
-						<input
-							type="radio"
-							value="false"
-							checked={this.state.isModernApp === false}
-							onChange={this.onRadioChange}
+					<RadioGroup onChange={this.onRadioChange}>
+						<FormControlLabel
+							checked={!this.state.isModernApp}
+							value={false}
+							control={<Radio />}
+							label="Basic ToDo App"
 						/>
-						<span>Basic ToDo App</span>
-					</label>
-					<br />
-					<label>
-						<input
-							type="radio"
-							value="true"
-							checked={this.state.isModernApp === true}
-							onChange={this.onRadioChange}
+						<FormControlLabel
+							checked={this.state.isModernApp}
+							value={true}
+							control={<Radio />}
+							label="Task Sharing App"
 						/>
-						<span>Task Sharing App</span>
-					</label>
-					<br />
-					<button type="submit">Choose App</button>
+					</RadioGroup>
+
+					<Button variant="contained" color="primary" type="submit">
+						Choose App
+					</Button>
 				</form>
 			</div>
 		);
