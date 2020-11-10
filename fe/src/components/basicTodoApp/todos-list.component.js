@@ -7,8 +7,11 @@ import { set, get, del } from "idb-keyval";
 import axios from "axios";
 
 import CreateTodo from "../create-todo.component";
-import TodoForm from "./todo-form.component"
+import TodoForm from "./todo-form.component";
+
 import { swapApp } from "./../../services/applicationChoice/app-choice";
+
+import { Button, Grid, List, ListItem, ListItemText } from "@material-ui/core";
 
 import "./todos-list.css";
 
@@ -23,28 +26,42 @@ const Todo = (props) => (
 	</tr>
 );
 
-const RemoveComp = ({ todo, removeItem }) => {
+const RemoveComp = ({ todo, removeItem, index }) => {
 	return (
-		<div>
-			<li
-				onClick={() => {
-					removeItem(todo.todoId);
-				}}
-			>
-				{todo.todoDescription}
-			</li>
-		</div>
+		<Grid item xs={12}>
+			<div>
+				<List
+					style={{
+						backgroundColor:
+							index % 2 === 0 ? "#55D6BE" : "#FFFFFF",
+					}}
+					onClick={() => {
+						removeItem(todo.todoId);
+					}}
+				>
+					<ListItem>
+						<ListItemText primary={todo.todoDescription} />
+					</ListItem>
+				</List>
+			</div>
+		</Grid>
 	);
 };
 
 const ListItems = ({ todos, removeItem }) => {
+	let index = 0;
 	// Map through the todos
 	const todoNode = todos.map((todo) => {
 		return (
-			<RemoveComp todo={todo} key={todo.todoId} removeItem={removeItem} />
+			<RemoveComp
+				todo={todo}
+				key={todo.todoId}
+				removeItem={removeItem}
+				index={index++}
+			/>
 		);
 	});
-	return <ul>{todoNode}</ul>;
+	return <ul className="todoItems">{todoNode}</ul>;
 };
 
 /**
@@ -147,8 +164,8 @@ export default class TodosList extends Component {
 
 	// Change the app choice and then redirect.
 	switchApps() {
-		swapApp().then(newLocation => {
-			console.debug("New Location: ", newLocation)
+		swapApp().then((newLocation) => {
+			console.debug("New Location: ", newLocation);
 
 			const redirect = {
 				location: newLocation,
@@ -170,8 +187,15 @@ export default class TodosList extends Component {
 				<p>
 					You can use this as a todo list! No need for internet :)
 					<br />A more feature rich application will be coming soon!
-					If you would like to switch applications.
-					<button onClick={this.switchApps}> click here!</button>
+					If you would like to switch applications click the button
+					below.
+					<Button
+						color="secondary"
+						variant="contained"
+						onClick={this.switchApps}
+					>
+						Swap Applications
+					</Button>
 					<br />
 					Feel free to add items. <br />
 					Remove items by clicking on the item itself
