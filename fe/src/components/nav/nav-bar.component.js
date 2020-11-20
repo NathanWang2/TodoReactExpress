@@ -5,13 +5,14 @@ import {
 	AppBar,
 	Toolbar,
 	Typography,
-	Button,
 	IconButton,
 	Link,
 	Menu,
 	MenuItem,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+
+import "./nav-bar.css";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -45,7 +46,7 @@ export default function NavBar() {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static">
+			<AppBar position="static" className="main">
 				<Toolbar>
 					<IconButton
 						edge="start"
