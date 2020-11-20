@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { swapApp } from "./../../services/applicationChoice/app-choice";
 import { Redirect } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import MainTable from "./homePage/main-table.app.component";
 
 export default class ShareTaskApp extends Component {
 	constructor(props) {
@@ -53,6 +54,8 @@ export default class ShareTaskApp extends Component {
 					This portion of the applicaion isn't done yet. <br />
 					Feel free to use the basic todo feature!
 				</p>
+
+				<MainTable />
 			</div>
 		);
 	}
